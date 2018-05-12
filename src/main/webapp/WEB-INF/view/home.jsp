@@ -16,15 +16,19 @@
 
 <hr/>
 
-<p>
-    <a href="${pageContext.request.contextPath}/managers">Manager meeting</a>
-    (Only for managers)
-</p>
+<security:authorize access="hasRole('MANAGER')">
+    <p>
+        <a href="${pageContext.request.contextPath}/managers">Manager meeting</a>
+        (Only for managers)
+    </p>
+</security:authorize>
 
-<p>
-    <a href="${pageContext.request.contextPath}/system">System maintenance</a>
-    (Only for admins)
-</p>
+<security:authorize access="hasRole('ADMIN')">
+    <p>
+        <a href="${pageContext.request.contextPath}/system">System maintenance</a>
+        (Only for admins)
+    </p>
+</security:authorize>
 
 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
     <input type="submit" value="Logout"/>
