@@ -21,6 +21,10 @@
         <i class="failed">Authentication failed. Invalid user name or password.</i>
     </c:if>
 
+    <c:if test="${param.logout != null}">
+        <i>You have just logged out.</i>
+    </c:if>
+
     <p>User name: <input type="text" name="username"/></p>
     <p>Password: <input type="password" name="password"/></p>
 
