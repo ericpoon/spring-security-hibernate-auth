@@ -28,17 +28,9 @@ public class HibernateUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getUserByName(username);
-        List<Authority> authorities = authorityDao.getUserAuthorities(username);
-        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
 
         System.out.println("\n>>> Authenticating");
         System.out.println(user);
-
-//        for (Authority authority : authorities) {
-//            grantedAuthorityList.add(new SimpleGrantedAuthority(authority.getAuthority()));
-//        }
-
-//        user.setAuthorities(grantedAuthorityList);
 
         return user;
     }

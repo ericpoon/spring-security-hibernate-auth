@@ -1,10 +1,13 @@
 package com.demo.springsecurity.demo.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,8 +20,8 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-//    @OneToMany(targetEntity = Authority.class, mappedBy = "authority", cascade = CascadeType.ALL)
-//    private Collection<? extends GrantedAuthority> authorities;
+    @OneToMany(mappedBy = "key.user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Authority> authorities;
 
     public User() {
     }
@@ -50,7 +53,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        for (Authority authority : authorities) {
+            grantedAuthorityList.add(new SimpleGrantedAuthority(authority.getAuthority()));
+        }
+        return grantedAuthorityList;
     }
 
     public String getUsername() {
@@ -78,6 +85,7 @@ public class User implements UserDetails {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", authorities=" + authorities +
                 '}';
     }
 }

@@ -9,15 +9,26 @@ public class Authority {
 
     @Embeddable
     private static class AuthorityTableCompositeKey implements Serializable {
-        private String username;
+        @ManyToOne
+        @JoinColumn(name="username")
+        private User user;
+
         private String authority;
 
-        public AuthorityTableCompositeKey() {
-        }
+//        public AuthorityTableCompositeKey() {
+//        }
+//
+//        public AuthorityTableCompositeKey(String username, String authority) {
+//            this.username = username;
+//            this.authority = authority;
+//        }
 
-        public AuthorityTableCompositeKey(String username, String authority) {
-            this.username = username;
-            this.authority = authority;
+        @Override
+        public String toString() {
+            return "AuthorityTableCompositeKey{" +
+                    "username='" + user.getUsername() + '\'' +
+                    ", authority='" + authority + '\'' +
+                    '}';
         }
     }
 
@@ -25,11 +36,19 @@ public class Authority {
     private AuthorityTableCompositeKey key = new AuthorityTableCompositeKey();
 
     public String getUsername() {
-        return key.username;
+        return key.user.getUsername();
     }
 
     public String getAuthority() {
         return key.authority;
     }
+
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "key=" + key +
+                '}';
+    }
+
 }
 
