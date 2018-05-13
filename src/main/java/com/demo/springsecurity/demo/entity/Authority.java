@@ -15,14 +15,6 @@ public class Authority {
 
         private String authority;
 
-//        public AuthorityTableCompositeKey() {
-//        }
-//
-//        public AuthorityTableCompositeKey(String username, String authority) {
-//            this.username = username;
-//            this.authority = authority;
-//        }
-
         @Override
         public String toString() {
             return "AuthorityTableCompositeKey{" +
