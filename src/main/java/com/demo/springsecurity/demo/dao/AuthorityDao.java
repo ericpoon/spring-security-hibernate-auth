@@ -1,5 +1,6 @@
 package com.demo.springsecurity.demo.dao;
 
+import com.demo.springsecurity.demo.entity.Authority;
 import com.demo.springsecurity.demo.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,29 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UserDao {
+public class AuthorityDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional
-    public List<User> getUsers() {
+    public List<Authority> getUserAuthorities(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query<User> query = session.createQuery("from User", User.class);
+        Query<Authority> query = session.createQuery("from Authority a where a.key.username=:username", Authority.class);
+        query.setParameter("username", username);
         return query.getResultList();
-    }
-
-    @Transactional
-    public User getUserByName(String name) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from User u where u.username=:name", User.class);
-        query.setParameter("name", name);
-        Object result = query.uniqueResult();
-        if (result != null) {
-            return (User) result;
-        } else {
-            return null;
-        }
     }
 
 }

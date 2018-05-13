@@ -13,9 +13,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-
-        System.out.println(userDao.getUsers());
-
         return "login-form";
     }
 
