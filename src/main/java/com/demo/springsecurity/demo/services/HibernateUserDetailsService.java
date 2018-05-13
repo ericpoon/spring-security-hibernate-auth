@@ -20,6 +20,9 @@ public class HibernateUserDetailsService implements UserDetailsService {
         System.out.println("\n>>> Authenticating");
         System.out.println(user);
 
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
         return user;
     }
 }
