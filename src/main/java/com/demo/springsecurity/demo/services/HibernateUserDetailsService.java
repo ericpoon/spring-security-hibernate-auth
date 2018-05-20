@@ -17,9 +17,6 @@ public class HibernateUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getUserByName(username);
 
-        System.out.println("\n>>> Authenticating");
-        System.out.println(user);
-
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

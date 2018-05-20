@@ -43,11 +43,9 @@ public class LoginController {
 
     @PostMapping("/register/proceed")
     public String proceedUserSignUp(@ModelAttribute User user) {
-        System.out.println("PROCEEDING SIGN UP\n" + user);
         try {
             userService.createUser(user.getUsername(), user.getPassword(), new String[]{"ROLE_EMPLOYEE"});
         } catch (Exception e) {
-            System.out.println("Fail to create a new user.");
             return "redirect:/register?error";
         }
 

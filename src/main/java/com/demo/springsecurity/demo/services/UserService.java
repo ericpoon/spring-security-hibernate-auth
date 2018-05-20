@@ -41,8 +41,6 @@ public class UserService {
         }
         user.setAuthorities(authorityList);
 
-        System.out.println("creating user");
-
         userDao.createUser(user); // authority will also be saved due to cascading
     }
 }
