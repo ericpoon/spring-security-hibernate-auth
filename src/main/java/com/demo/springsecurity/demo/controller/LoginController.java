@@ -1,23 +1,28 @@
 package com.demo.springsecurity.demo.controller;
 
-import com.demo.springsecurity.demo.entity.Authority;
 import com.demo.springsecurity.demo.entity.User;
 import com.demo.springsecurity.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor); // fixme: this will also trim password
+    }
 
     @GetMapping("/login")
     public String showLoginForm() {
