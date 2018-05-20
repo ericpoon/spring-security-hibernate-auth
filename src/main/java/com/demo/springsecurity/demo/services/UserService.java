@@ -26,6 +26,11 @@ public class UserService {
     }
 
     public void createUser(String name, String password, String[] authorities) {
+
+        if (userDao.getUserByName(name) != null) {
+            throw new RuntimeException("User already exists.");
+        }
+
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
 
