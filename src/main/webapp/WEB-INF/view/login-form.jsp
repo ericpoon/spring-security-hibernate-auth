@@ -30,5 +30,10 @@
 
     <input type="submit" value="Login"/>
 </form:form>
+
+<div>
+    <a href="${pageContext.request.contextPath}/register">Sign up</a>
+</div>
+
 </body>
 </html>

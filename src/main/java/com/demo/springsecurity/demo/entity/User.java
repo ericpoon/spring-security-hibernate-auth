@@ -20,6 +20,9 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    @Column
+    private boolean enabled = true;
+
     @OneToMany(mappedBy = "key.user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
@@ -74,6 +77,10 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override

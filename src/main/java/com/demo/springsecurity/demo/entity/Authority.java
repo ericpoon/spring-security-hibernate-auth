@@ -10,7 +10,7 @@ public class Authority {
     @Embeddable
     private static class AuthorityTableCompositeKey implements Serializable {
         @ManyToOne
-        @JoinColumn(name="username")
+        @JoinColumn(name = "username")
         private User user;
 
         private String authority;
@@ -33,6 +33,15 @@ public class Authority {
 
     public String getAuthority() {
         return key.authority;
+    }
+
+    public Authority() {
+    }
+
+    public Authority(User user, String authority) {
+        this.key = new AuthorityTableCompositeKey();
+        key.user = user;
+        key.authority = authority;
     }
 
     @Override
