@@ -47,7 +47,8 @@ public class LoginController {
         try {
             userService.createUser(user.getUsername(), user.getPassword(), new String[]{"ROLE_EMPLOYEE"});
         } catch (Exception e) {
-            return "sign-up-form";
+            System.out.println("Fail to create a new user.");
+            return "redirect:/register?error";
         }
 
         return "login-form";
